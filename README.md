@@ -1,13 +1,19 @@
 # Hemend Async Logger
 
 [![License: MIT][license_badge]][license_link]
-[![pub package](https://img.shields.io/pub/v/hemend_async_log_recorder?color=blue)](https://pub.dev/packages/hemend_async_log_recorder)
-[![pub points](https://img.shields.io/pub/points/hemend_async_log_recorder)](https://pub.dev/packages/hemend_async_log_recorder)
-[![code_count](https://img.shields.io/github/languages/top/fmotalleb/hemend_async_log_recorder?color=green&label=pure%20dart)](https://pub.dev/packages/hemend_async_log_recorder)
-[![code size](https://img.shields.io/github/languages/code-size/fmotalleb/hemend_async_log_recorder)](https://github.com/FMotalleb/hemend_async_log_recorder)
-[![git repo](https://img.shields.io/pub/v/hemend_async_log_recorder?color=blue&label=git)](https://github.com/FMotalleb/hemend_async_log_recorder)
+[![pub package](https://img.shields.io/pub/v/hemend_async_log_recorder?color=blue)][pub_link]
+[![pub points](https://img.shields.io/pub/points/hemend_async_log_recorder)][pub_link]
+[![code_count](https://img.shields.io/github/languages/top/fmotalleb/hemend_async_log_recorder?color=green&label=pure%20dart)][pub_link]
+[![code size](https://img.shields.io/github/languages/code-size/fmotalleb/hemend_async_log_recorder)][git_link]
+[![git repo](https://img.shields.io/pub/v/hemend_async_log_recorder?color=blue&label=git)][git_link]
 
-A Very Good Project created by Very Good CLI.
+The presented software package expands upon the existing functionality of the hemend_logger package, which can be found at <https://pub.dev/packages/hemend_logger>. This extension enhances the capabilities of the package by introducing asynchronous logging functions that enable the recording of logs using various methods, such as post requests, websockets, files, and more.
+
+At its current state, the package includes built-in support for post request and file logging functionalities, allowing users to seamlessly utilize these mechanisms for recording logs.
+
+![File Recorder](./assets/file.png "Default File Recorder")
+
+![Post Recorder](./assets/request.png "Default Post Recorder")
 
 ## Installation 💻
 
@@ -30,9 +36,17 @@ dart pub get
 
 ## Usage
 
-This software package extends [`hemend_logger`](https://pub.dev/packages/hemend_logger) package's capabilities to use asynchronously logging functions like recording logs using a post request, websocket, file, etc.
+just add desired logger to the hemend_logger instance and start logging
 
-currently shipped with internal support for post request and file logging functionality.
+```dart
+HemendLogger.defaultLogger()
+  ..addListener(
+    HemendAsyncLogRecorder.post(postUrl: 'https://<Server>/record'),
+  )
+  ..addListener(
+    HemendAsyncLogRecorder.file(filePath: 'example/test.log'),
+  );
+```
 
 ---
 
@@ -42,28 +56,6 @@ Hemend Async Logger comes with a built-in [GitHub Actions workflow][github_actio
 
 Out of the box, on each pull request and push, the CI `formats`, `lints`, and `tests` the code. This ensures the code remains consistent and behaves correctly as you add functionality or make changes. The project uses [Very Good Analysis][very_good_analysis_link] for a strict set of analysis options used by our team. Code coverage is enforced using the [Very Good Workflows][very_good_coverage_link].
 
----
-
-## Running Tests 🧪
-
-To run all unit tests:
-
-```sh
-dart pub global activate coverage 1.2.0
-dart test --coverage=coverage
-dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info
-```
-
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
-
-```sh
-# Generate Coverage Report
-genhtml coverage/lcov.info -o coverage/
-
-# Open Coverage Report
-open coverage/index.html
-```
-
 [dart_install_link]: https://dart.dev/get-dart
 [github_actions_link]: https://docs.github.com/en/actions/learn-github-actions
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
@@ -71,3 +63,5 @@ open coverage/index.html
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
 [very_good_coverage_link]: https://github.com/marketplace/actions/very-good-coverage
 [very_good_workflows_link]: https://github.com/VeryGoodOpenSource/very_good_workflows
+[git_link]: https://github.com/FMotalleb/hemend_async_log_recorder
+[pub_link]: https://pub.dev/packages/hemend_async_log_recorder
