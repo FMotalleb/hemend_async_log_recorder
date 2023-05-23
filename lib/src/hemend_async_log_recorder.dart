@@ -35,7 +35,7 @@ class HemendAsyncLogRecorder extends ILogRecorder {
   }) =>
       HemendAsyncLogRecorder.manual(
         logLevel,
-        LogSink(
+        PostLogSink(
           serializer: recordSerializer,
           requestUrl: postUrl,
           recordMethod: postMethod,

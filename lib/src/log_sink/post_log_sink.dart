@@ -10,12 +10,12 @@ import 'package:hemend_logger/hemend_logger.dart';
 /// a record sink that receives log records then serialize them using given
 /// serializer and sends it using the given send method.
 /// {@endtemplate}
-class LogSink extends ILogSink {
+class PostLogSink extends ILogSink {
   /// {@macro log-sink}
   ///
   /// * serializer: the method used to serialize the record to json
   /// *
-  LogSink({
+  PostLogSink({
     required RecordSerializer serializer,
     required String requestUrl,
     required PostMethod recordMethod,
