@@ -36,7 +36,7 @@ dart pub get
 
 ## Usage
 
-just add desired logger to the hemend_logger instance and start logging
+Just add desired logger to the hemend_logger instance and start logging
 
 ```dart
 HemendLogger.defaultLogger()
