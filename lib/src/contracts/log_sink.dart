@@ -4,4 +4,4 @@ import 'package:hemend_logger/hemend_logger.dart';
 /// since log recorder's onRecord method is not asynchronous
 /// this sink handles the requests
 /// {@endtemplate}
-abstract class ILogSink extends Sink<LogRecordEntity> {}
+abstract class ILogSink implements Sink<LogRecordEntity> {}
