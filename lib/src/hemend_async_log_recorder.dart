@@ -1,16 +1,16 @@
+import 'package:hemend_async_log_recorder/src/contracts/log_sink.dart';
+import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
+import 'package:hemend_async_log_recorder/src/helpers/default_post_method.dart';
+import 'package:hemend_async_log_recorder/src/helpers/record_serializer.dart';
+import 'package:hemend_async_log_recorder/src/log_sink/post_log_sink.dart';
 import 'package:hemend_logger/hemend_logger.dart';
-import 'package:hemend_network_log_recorder/src/contracts/log_sink.dart';
-import 'package:hemend_network_log_recorder/src/contracts/typedefs.dart';
-import 'package:hemend_network_log_recorder/src/helpers/default_post_method.dart';
-import 'package:hemend_network_log_recorder/src/helpers/record_serializer.dart';
-import 'package:hemend_network_log_recorder/src/log_sink/log_sink.dart';
 
-/// {@template hemend_network_log_recorder}
+/// {@template hemend_async_log_recorder}
 /// A Simple implementation of [ILogRecorder] that sends log messages
 /// using [ILogSink]
 /// {@endtemplate}
-class HemendNetworkLogRecorder extends ILogRecorder {
-  /// {@macro hemend_network_log_recorder}
+class HemendAsyncLogRecorder extends ILogRecorder {
+  /// {@macro hemend_async_log_recorder}
   ///
   /// this constructor uses simple api to construct the recorder
   ///
@@ -27,13 +27,13 @@ class HemendNetworkLogRecorder extends ILogRecorder {
   /// * [recordSerializer] (Optional): uses [defaultRecordSerializer] by default
   /// you are able to change this method to your desired serialization format
   /// but its not needed for most cases
-  factory HemendNetworkLogRecorder({
+  factory HemendAsyncLogRecorder({
     required String postUrl,
     int logLevel = 800,
     PostMethod postMethod = defaultPostMethod,
     RecordSerializer recordSerializer = defaultRecordSerializer,
   }) =>
-      HemendNetworkLogRecorder.manual(
+      HemendAsyncLogRecorder.manual(
         logLevel,
         LogSink(
           serializer: recordSerializer,
@@ -42,8 +42,8 @@ class HemendNetworkLogRecorder extends ILogRecorder {
         ),
       );
 
-  /// {@macro hemend_network_log_recorder}
-  const HemendNetworkLogRecorder.manual(
+  /// {@macro hemend_async_log_recorder}
+  const HemendAsyncLogRecorder.manual(
     this.logLevel,
     this.requestSink,
   );

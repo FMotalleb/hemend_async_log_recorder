@@ -19,6 +19,6 @@
   ],
   "useGitignore": true,
   "words": [
-    "hemend_network_log_recorder"
+    "hemend_async_log_recorder"
   ]
 }
