@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:hemend_async_log_recorder/src/contracts/file_log_sink.dart' as base;
+import 'package:hemend_async_log_recorder/src/contracts/file_log_sink.dart' //
+    as base;
 import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
 import 'package:hemend_logger/hemend_logger.dart';
 
