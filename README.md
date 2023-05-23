@@ -1,8 +1,11 @@
 # Hemend Async Logger
 
-[![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
-[![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
 [![License: MIT][license_badge]][license_link]
+[![pub package](https://img.shields.io/pub/v/hemend_async_log_recorder?color=blue)](https://pub.dev/packages/hemend_async_log_recorder)
+[![pub points](https://img.shields.io/pub/points/hemend_async_log_recorder)](https://pub.dev/packages/hemend_async_log_recorder)
+[![code_count](https://img.shields.io/github/languages/top/fmotalleb/hemend_async_log_recorder?color=green&label=pure%20dart)](https://pub.dev/packages/hemend_async_log_recorder)
+[![code size](https://img.shields.io/github/languages/code-size/fmotalleb/hemend_async_log_recorder)](https://github.com/FMotalleb/hemend_async_log_recorder)
+[![git repo](https://img.shields.io/pub/v/hemend_async_log_recorder?color=blue&label=git)](https://github.com/FMotalleb/hemend_async_log_recorder)
 
 A Very Good Project created by Very Good CLI.
 
@@ -14,7 +17,7 @@ Add `hemend_async_log_recorder` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  hemend_async_log_recorder:
+  hemend_async_log_recorder: <latest-version>
 ```
 
 Install it:
@@ -22,6 +25,14 @@ Install it:
 ```sh
 dart pub get
 ```
+
+---
+
+## Usage
+
+This software package extends [`hemend_logger`](https://pub.dev/packages/hemend_logger) package's capabilities to use asynchronously logging functions like recording logs using a post request, websocket, file, etc.
+
+currently shipped with internal support for post request and file logging functionality.
 
 ---
 
@@ -57,7 +68,6 @@ open coverage/index.html
 [github_actions_link]: https://docs.github.com/en/actions/learn-github-actions
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://opensource.org/licenses/MIT
-[very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
 [very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
 [very_good_coverage_link]: https://github.com/marketplace/actions/very-good-coverage
 [very_good_workflows_link]: https://github.com/VeryGoodOpenSource/very_good_workflows

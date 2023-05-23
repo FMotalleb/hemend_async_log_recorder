@@ -2,7 +2,7 @@ import 'package:hemend_async_log_recorder/src/contracts/log_sink.dart';
 import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
 import 'package:hemend_async_log_recorder/src/helpers/default_post_method.dart';
 import 'package:hemend_async_log_recorder/src/helpers/record_serializer.dart';
-import 'package:hemend_async_log_recorder/src/log_sink/post_log_sink.dart';
+import 'package:hemend_async_log_recorder/src/log_sinks/post_log_sink.dart';
 import 'package:hemend_logger/hemend_logger.dart';
 
 /// {@template hemend_async_log_recorder}
@@ -27,7 +27,7 @@ class HemendAsyncLogRecorder extends ILogRecorder {
   /// * [recordSerializer] (Optional): uses [defaultRecordSerializer] by default
   /// you are able to change this method to your desired serialization format
   /// but its not needed for most cases
-  factory HemendAsyncLogRecorder({
+  factory HemendAsyncLogRecorder.post({
     required String postUrl,
     int logLevel = 800,
     PostMethod postMethod = defaultPostMethod,
@@ -45,17 +45,17 @@ class HemendAsyncLogRecorder extends ILogRecorder {
   /// {@macro hemend_async_log_recorder}
   const HemendAsyncLogRecorder.manual(
     this.logLevel,
-    this.requestSink,
+    this._requestSink,
   );
 
   /// a log sink that manages log records
   /// this is used to make sure that sync records are able to
   /// send using an async method
-  final ILogSink requestSink;
+  final ILogSink _requestSink;
 
   @override
   final int logLevel;
 
   @override
-  void onRecord(LogRecordEntity record) => requestSink.add(record);
+  void onRecord(LogRecordEntity record) => _requestSink.add(record);
 }

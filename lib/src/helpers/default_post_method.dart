@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 final _client = http.Client();
@@ -7,7 +9,7 @@ Future<void> defaultPostMethod(String url, Map<String, dynamic> record) async {
   try {
     await _client.post(
       Uri.parse(url),
-      body: record,
+      body: jsonEncode(record),
     );
   } finally {
     _client.close();
