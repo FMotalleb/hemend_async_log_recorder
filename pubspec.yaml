@@ -1,7 +1,7 @@
 name: hemend_async_log_recorder
 description: An Extension to the hemend_logger package that enables asynchronously logging
 version: 0.1.0+1
-publish_to: none
+repository: https://github.com/FMotalleb/hemend_async_log_recorder
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
