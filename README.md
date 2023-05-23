@@ -19,10 +19,11 @@ At its current state, the package includes built-in support for post request and
 
 **❗ In order to start using Hemend Async Logger you must have the [Dart SDK][dart_install_link] installed on your machine.**
 
-Add `hemend_async_log_recorder` to your `pubspec.yaml`:
+Add `hemend_async_log_recorder` and `hemend_logger` to your`pubspec.yaml`:
 
 ```yaml
 dependencies:
+  hemend_logger: <latest-version>
   hemend_async_log_recorder: <latest-version>
 ```
 

@@ -84,4 +84,7 @@ class HemendAsyncLogRecorder extends ILogRecorder {
 
   @override
   void onRecord(LogRecordEntity record) => _requestSink.add(record);
+
+  @override
+  void close() => _requestSink.close();
 }
