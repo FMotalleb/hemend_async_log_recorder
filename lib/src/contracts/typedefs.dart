@@ -15,11 +15,11 @@ typedef PostMethod = Future<void> Function(
 );
 
 /// {@template a-result-signature}
-/// The result signature refers to the shape or structure of the object that will
-///  be returned from the handler in a specific context. It serves as a container
-///   for the last result obtained from deferred methods and also holds
-///  information about the most recent exception that was thrown within
-///  the handler.
+/// The result signature refers to the shape or structure of the object
+/// that will be returned from the handler in a specific context.
+/// It serves as a container for the last result obtained from deferred methods
+/// and also holds information about the most recent exception that was
+/// thrown within the handler.
 ///
 /// The purpose of the result signature is to encapsulate the outcome of
 /// the handler's execution, allowing for the transmission of relevant data and

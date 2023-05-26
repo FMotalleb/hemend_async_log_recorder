@@ -57,7 +57,10 @@ extension SignatureHelper<T> on ResultSignature<T> {
   /// final originalResult = ResultSignature<int>(result: 5, exception: null);
   /// final newResult = originalResult.copyWith(result: 10);
   ///  // newResult will have result: 10 and exception: null
-  /// final originalResult2 = ResultSignature<String>(result: null, exception: Exception('Error'));
+  /// final originalResult2 = ResultSignature<String>(
+  ///         result: null,
+  ///         exception: Exception('Error'),
+  ///       );
   /// final newResult2 = originalResult2.copyWith(exception: null);
   /// // newResult2 will have result: null and exception: Exception('Error')
   /// ```
