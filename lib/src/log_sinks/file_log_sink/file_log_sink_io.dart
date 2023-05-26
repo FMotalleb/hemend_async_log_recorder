@@ -1,9 +1,12 @@
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'dart:async';
 import 'dart:io';
 
 import 'package:hemend_async_log_recorder/src/contracts/file_log_sink.dart' //
     as base;
 import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
+import 'package:hemend_async_log_recorder/src/go_flow/helper.dart';
 import 'package:hemend_logger/hemend_logger.dart';
 
 /// {@template file-log}
@@ -23,13 +26,28 @@ class FileLogSink implements base.FileLogSink {
   }
 
   void _initSink(RecordStringify stringify, File file) {
-    _controller.stream.map(stringify).listen(
-      (message) async {
-        await file.writeAsString(
-          message,
-          mode: FileMode.append,
-        );
-      },
+    unawaited(
+      asyncFlow(
+        (defer) async {
+          final sink = file.openWrite(
+            mode: FileMode.append,
+          );
+          defer(
+            (_) {
+              sink.close();
+            },
+          );
+          final recordStream = _controller //
+              .stream
+              .map(stringify)
+              .map(
+                (event) => event.codeUnits,
+              );
+          await for (final i in recordStream) {
+            sink.add(i);
+          }
+        },
+      ),
     );
   }
 

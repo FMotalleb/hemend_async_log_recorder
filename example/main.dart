@@ -2,7 +2,7 @@ import 'package:hemend_async_log_recorder/hemend_async_log_recorder.dart';
 import 'package:hemend_logger/hemend_logger.dart';
 import 'package:logging/logging.dart';
 
-void main() {
+void main() async {
   Logger.root.level = Level.ALL;
   final logger = Logger.root;
   HemendLogger.defaultLogger()
@@ -12,9 +12,11 @@ void main() {
     ..addListener(
       HemendAsyncLogRecorder.file(filePath: 'example/test.log'),
     );
-  logger.info(
-    'test',
-  );
+  for (var i = 0; i < 10; i++) {
+    logger.info(
+      i,
+    );
+  }
   // sends this body to the server
   //{
   //  "ticket_id": 555,
