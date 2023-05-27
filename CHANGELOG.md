@@ -1,3 +1,7 @@
+## 0.1.4+2
+
+* (feat): web socket log recorder
+
 ## 0.1.3+1
 
 * (feat): deferred execution flow like go
