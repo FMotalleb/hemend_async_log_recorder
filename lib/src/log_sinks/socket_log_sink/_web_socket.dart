@@ -7,8 +7,8 @@ import 'package:hemend_logger/hemend_logger.dart';
 
 import 'package:meta/meta.dart';
 
-/// this class is example of Socket connection using [WebSocket]html which is not
-/// accessible in platforms other than web
+/// this class is example of Socket connection using [WebSocket]html which is
+/// not accessible in platforms other than web
 @internal
 class SocketLogSink extends base.SocketLogSink<WebSocket> {
   /// creates socket connection from io.WebSocket

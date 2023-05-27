@@ -11,16 +11,18 @@ abstract class SocketLogSink<T extends Object> //
     required this.serializer,
   });
 
-  final RecordSerializer serializer;
-
   /// since its impossible to use constructor of abstract class
   /// you should use this factory to create connection instances
   factory SocketLogSink.from(
     T _, {
+    // ignore: avoid_unused_constructor_parameters
     required RecordSerializer serializer,
   }) {
     throw Exception('this method cannot be called');
   }
+
+  /// used to map log record to json data
+  final RecordSerializer serializer;
 
   /// socket connection
   final T socket;
