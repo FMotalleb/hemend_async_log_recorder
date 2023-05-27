@@ -5,6 +5,7 @@ import 'package:hemend_async_log_recorder/src/helpers/default_stringify.dart';
 import 'package:hemend_async_log_recorder/src/helpers/record_serializer.dart';
 import 'package:hemend_async_log_recorder/src/log_sinks/file_log_sink/file_log_sink.dart';
 import 'package:hemend_async_log_recorder/src/log_sinks/post_log_sink.dart';
+import 'package:hemend_async_log_recorder/src/log_sinks/socket_log_sink/socket_log_sink.dart';
 import 'package:hemend_logger/hemend_logger.dart';
 
 /// {@template hemend_async_log_recorder}
@@ -45,12 +46,6 @@ class HemendAsyncLogRecorder extends ILogRecorder {
       );
 
   /// {@macro hemend_async_log_recorder}
-  const HemendAsyncLogRecorder.manual(
-    this.logLevel,
-    this._requestSink,
-  );
-
-  /// {@macro hemend_async_log_recorder}
   ///
   /// * [filePath]: local file path
   /// (this method will throw an exception in non-dart:io environments)
@@ -73,6 +68,37 @@ class HemendAsyncLogRecorder extends ILogRecorder {
       ),
     );
   }
+
+  /// {@macro hemend_async_log_recorder}
+  ///
+  /// * socket: web socket connection (from dart:io or dart:html)
+  ///
+  /// * [logLevel] (Optional): the level of the log to be recorded
+  /// defaults to 800 which is equal to Level.INFO but you may set this to zero
+  /// and use a limited logger
+  ///
+  /// * [recordSerializer] (Optional): uses [defaultRecordSerializer] by default
+  /// you are able to change this method to your desired serialization format
+  /// but its not needed for most cases
+  factory HemendAsyncLogRecorder.webSocket({
+    required Object socket,
+    RecordSerializer recordSerializer = defaultRecordSerializer,
+    int logLevel = 800,
+  }) {
+    return HemendAsyncLogRecorder.manual(
+      logLevel,
+      SocketLogSink.from(
+        socket,
+        serializer: recordSerializer,
+      ),
+    );
+  }
+
+  /// {@macro hemend_async_log_recorder}
+  const HemendAsyncLogRecorder.manual(
+    this.logLevel,
+    this._requestSink,
+  );
 
   /// a log sink that manages log records
   /// this is used to make sure that sync records are able to
