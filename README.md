@@ -9,7 +9,7 @@
 
 The presented software package expands upon the existing functionality of the hemend_logger package, which can be found at <https://pub.dev/packages/hemend_logger>. This extension enhances the capabilities of the package by introducing asynchronous logging functions that enable the recording of logs using various methods, such as post requests, websockets, files, and more.
 
-At its current state, the package includes built-in support for post request and file logging functionalities, allowing users to seamlessly utilize these mechanisms for recording logs.
+At its current state, the package includes built-in support for post request, web socket and file logging functionalities, allowing users to seamlessly utilize these mechanisms for recording logs.
 
 ![File Recorder](./assets/file.png "Default File Recorder")
 
