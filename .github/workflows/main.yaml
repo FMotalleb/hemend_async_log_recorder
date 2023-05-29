@@ -25,7 +25,5 @@ jobs:
   build:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/dart_package.yml@v1
     with:
-      coverage_excludes: "*.g.dart"
-      dart_sdk: "stable"
-      platform: "chrome,vm"
-      working_directory: "examples/my_dart_package"
+      min_coverage: 85
+      format_directories: "lib/"
