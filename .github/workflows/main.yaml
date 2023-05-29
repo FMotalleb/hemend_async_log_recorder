@@ -11,60 +11,6 @@ on:
   pull_request:
     branches:
       - master
-  workflow_call:
-    inputs:
-      analyze_directories:
-        required: false
-        type: string
-        default: "lib test"
-      concurrency:
-        required: false
-        type: number
-        default: 4
-      coverage_excludes:
-        required: false
-        type: string
-        default: ""
-      dart_sdk:
-        required: false
-        type: string
-        default: "stable"
-      format_directories:
-        required: false
-        type: string
-        default: "lib/"
-      format_line_length:
-        required: false
-        type: string
-        default: "80"
-      min_coverage:
-        required: false
-        type: number
-        default: 85
-      platform:
-        required: false
-        type: string
-        default: "vm"
-      check_ignore:
-        required: false
-        type: boolean
-        default: false
-      report_on:
-        required: false
-        type: string
-        default: "lib"
-      runs_on:
-        required: false
-        type: string
-        default: "ubuntu-latest"
-      setup:
-        required: false
-        type: string
-        default: ""
-      working_directory:
-        required: false
-        type: string
-        default: "."
 
 jobs:
   semantic_pull_request:
@@ -79,9 +25,9 @@ jobs:
   build:
     defaults:
       run:
-        working-directory: ${{inputs.working_directory}}
+        working-directory: "."
 
-    runs-on: ${{inputs.runs_on}}
+    runs-on: ubuntu-latest
 
     steps:
       - name: 📚 Git Checkout
@@ -90,29 +36,25 @@ jobs:
       - name: 🎯 Setup Dart
         uses: dart-lang/setup-dart@v1
         with:
-          sdk: ${{inputs.dart_sdk}}
+          sdk: stable
 
       - name: 📦 Install Dependencies
         run: dart pub get
 
-      - name: ⚙️ Run Setup
-        if: "${{inputs.setup != ''}}"
-        run: ${{inputs.setup}}
-
       - name: ✨ Check Formatting
-        run: dart format --line-length ${{inputs.format_line_length}} --set-exit-if-changed ${{inputs.format_directories}}
+        run: dart format --line-length 80 --set-exit-if-changed lib
 
       - name: 🕵️ Analyze
-        run: dart analyze --fatal-infos --fatal-warnings ${{inputs.analyze_directories}}
+        run: dart analyze --fatal-infos --fatal-warnings lib
 
       - name: 🧪 Run Tests
         run: |
           dart pub global activate coverage 1.2.0
-          dart test -j ${{inputs.concurrency}} --coverage=coverage --platform=${{inputs.platform}} && dart pub global run coverage:format_coverage --lcov ${{(inputs.check_ignore && '--check-ignore') || ''}} --in=coverage --out=coverage/lcov.info --packages=.dart_tool/package_config.json --report-on=${{inputs.report_on}}
+          dart test -j 4 --coverage=coverage --platform=vm && dart pub global run coverage:format_coverage --lcov ${{(inputs.check_ignore && '--check-ignore') || ''}} --in=coverage --out=coverage/lcov.info --packages=.dart_tool/package_config.json --report-on=lib
 
       - name: 📊 Check Code Coverage
         uses: VeryGoodOpenSource/very_good_coverage@v2
         with:
-          path: ${{inputs.working_directory}}/coverage/lcov.info
+          path: ./coverage/lcov.info
           exclude: ${{inputs.coverage_excludes}}
-          min_coverage: ${{inputs.min_coverage}}
+          min_coverage: 85
