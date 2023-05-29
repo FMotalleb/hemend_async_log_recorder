@@ -11,7 +11,7 @@ import 'package:hemend_async_log_recorder/src/go_flow/sync_flow.dart';
 ResultSignature<T> syncFlow<T>(
   SyncTask<T> task,
 ) =>
-    SyncFlowHandler.handle<T>(task);
+    SyncFlow.handle<T>(task);
 
 /// The provided code snippet presents a simple helper method designed to
 /// facilitate the usage of a flow handler. This helper method, named asyncFlow,

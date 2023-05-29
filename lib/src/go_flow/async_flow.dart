@@ -1,10 +1,13 @@
 import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
 import 'package:hemend_async_log_recorder/src/go_flow/helper.dart';
 
+/// {@template async-flow}
 /// Async Flow Handler will create an additional call stack to push desired
 /// methods to run after the main call
+/// {@endtemplate}
 class AsyncFlow<T> {
-  AsyncFlow._()
+  /// @{macro async-flow}
+  AsyncFlow()
       : _differedStack = [],
         _isDone = false;
 
@@ -24,12 +27,24 @@ class AsyncFlow<T> {
   static AsyncResultSignature<T> handle<T>(
     AsyncTask<T> task,
   ) =>
-      AsyncFlow<T>._()._deferredCall(task);
+      AsyncFlow<T>().deferredCall(task);
   final List<AsyncDeferred<T>> _differedStack;
   bool _isDone;
   void _pushToDiffer(AsyncDeferred<T> task) => _differedStack.add(task);
 
-  AsyncResultSignature<T> _deferredCall(
+  /// It receives an [AsyncTask] and executes it within a try scope.
+  /// It returns a AsyncResultSignature<T> object, which consists of a result
+  /// and an exception.
+  ///
+  /// The task parameter represents the main method to be executed in
+  /// the task flow. Within this method, you can use
+  /// the defer method (accessible as a parameter) to push methods to run after
+  /// the main method call.
+  ///
+  /// The defer method receives the result and/or exception from
+  /// the last deferred method or the main method. It can act on
+  /// these values and may or may not modify the result of the flow.
+  AsyncResultSignature<T> deferredCall(
     AsyncTask<T> task,
   ) async {
     if (_isDone) {

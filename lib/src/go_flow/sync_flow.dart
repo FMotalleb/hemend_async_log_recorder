@@ -1,6 +1,7 @@
 import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
 import 'package:hemend_async_log_recorder/src/go_flow/helper.dart';
 
+/// {@template sync-flow}
 /// The SyncFlowHandler is responsible for managing synchronous task flows by
 /// creating an additional call stack to schedule and execute desired methods
 /// after the main call. It provides a structured and organized approach to
@@ -19,8 +20,10 @@ import 'package:hemend_async_log_recorder/src/go_flow/helper.dart';
 /// Overall, the Sync Flow Handler serves as a valuable tool in managing
 /// synchronous task flows and enables developers to design efficient
 /// and well-structured synchronous execution paths.
-class SyncFlowHandler<T> {
-  SyncFlowHandler._()
+/// {@endtemplate}
+class SyncFlow<T> {
+  /// {@macro sync-flow}
+  SyncFlow()
       : _differedStack = [],
         _isDone = false;
 
@@ -38,12 +41,20 @@ class SyncFlowHandler<T> {
   static ResultSignature<T> handle<T>(
     SyncTask<T> task,
   ) =>
-      SyncFlowHandler<T>._()._deferredCall(task);
+      SyncFlow<T>().deferredCall(task);
   final List<SyncDeferred<T>> _differedStack;
   bool _isDone;
   void _pushToDiffer(SyncDeferred<T> task) => _differedStack.add(task);
 
-  ResultSignature<T> _deferredCall(
+  /// will receive a [SyncTask] and call it in a try scope
+  /// and returns a Record of ([T]? result, [Object]? exception)
+  ///
+  /// you can use `defer` method (accessible in the [SyncTask] as parameter)
+  /// to push methods to run after the main method call
+  ///
+  /// defer method will receive result and|or exception from last deferred
+  /// or the main method itself and act on them then they may or may not modify
+  ResultSignature<T> deferredCall(
     SyncTask<T> task,
   ) {
     if (_isDone) {
