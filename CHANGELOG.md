@@ -1,3 +1,9 @@
+## 0.1.6+1
+
+* (tests): io file tests
+* (fix): changed `ILogSink.close()` return type to `Future<void>`
+* (feat): added `ILogSink.isClosed` property
+
 ## 0.1.5+1
 
 * (minor): minor analysis changes
