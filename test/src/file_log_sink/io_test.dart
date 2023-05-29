@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
 import 'package:hemend_async_log_recorder/src/log_sinks/file_log_sink/file_log_sink_io.dart';
