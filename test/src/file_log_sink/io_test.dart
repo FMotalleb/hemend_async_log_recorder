@@ -7,7 +7,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import 'io.mocks.dart';
+import 'io_test.mocks.dart';
 
 // Create a mock for the File and IOSink
 @GenerateMocks([File, IOSink])
