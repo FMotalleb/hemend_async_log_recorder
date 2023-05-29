@@ -32,7 +32,7 @@ on:
       format_directories:
         required: false
         type: string
-        default: "."
+        default: "lib/"
       format_line_length:
         required: false
         type: string
