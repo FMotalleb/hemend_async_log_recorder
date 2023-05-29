@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'dart:html' show WebSocket;
 
 import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
-import 'package:hemend_async_log_recorder/src/log_sinks/socket_log_sink/_base_socket.dart' as base;
-import 'package:hemend_logger/hemend_logger.dart';
 
+import 'package:hemend_logger/hemend_logger.dart';
 import 'package:meta/meta.dart';
+import '_base_socket.dart' //
+    as base;
 
 /// this class is example of Socket connection using [WebSocket]html which is
 /// not accessible in platforms other than web
