@@ -64,7 +64,6 @@ void main() {
       await untilCalled(mockSink.add(any));
       verify(mockSink.add(expectedMessage)).called(1);
     });
-
     test('close method should close the controller sink', () async {
       // Act
       await fileLogSink.close();
