@@ -1,3 +1,7 @@
+## 0.1.5+1
+
+* (minor): minor analysis changes
+
 ## 0.1.4+2
 
 * (feat): web socket log recorder
