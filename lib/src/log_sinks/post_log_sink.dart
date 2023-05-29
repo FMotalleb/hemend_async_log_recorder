@@ -18,15 +18,15 @@ class PostLogSink extends ILogSink {
   /// It specifies the serializer responsible for converting log records into
   /// the desired format before sending them.
   ///
-  /// * `requestUrl` parameter is a required String that represents the URL where
-  /// the log records will be sent.
+  /// * `requestUrl` parameter is a required String that represents the URL
+  /// where the log records will be sent.
   ///
   /// * `recordMethod` parameter is of type PostMethod and is required.
   /// It indicates the HTTP method to be used when sending the log records.
   /// It is likely to be a POST method in this case.
   ///
-  /// * `concurrency` parameter is an integer that indicates the maximum number of
-  /// requests that can be launched simultaneously.
+  /// * `concurrency` parameter is an integer that indicates the maximum number
+  /// of requests that can be launched simultaneously.
   /// This parameter is crucial for managing the load on the server and
   /// controlling the rate at which log records are sent.
   ///

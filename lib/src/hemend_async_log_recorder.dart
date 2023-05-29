@@ -31,8 +31,8 @@ class HemendAsyncLogRecorder extends ILogRecorder {
   /// you are able to change this method to your desired serialization format
   /// but its not needed for most cases
   ///
-  /// * [concurrency] parameter is an integer that indicates the maximum number of
-  /// requests that can be launched simultaneously.
+  /// * [concurrency] parameter is an integer that indicates the maximum number
+  /// of requests that can be launched simultaneously.
   /// This parameter is crucial for managing the load on the server and
   /// controlling the rate at which log records are sent.
   ///
