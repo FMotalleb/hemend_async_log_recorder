@@ -1,5 +1,6 @@
 import 'package:hemend_async_log_recorder/src/contracts/log_sink.dart';
 import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
+import 'package:hemend_logger/hemend_logger.dart';
 
 /// this abstract class used to provide cross-platform socket-connection
 /// to logger
@@ -29,4 +30,12 @@ abstract class SocketLogSink<T extends Object> //
 
   /// check that socket is still attached to server
   bool get isAttached => false;
+
+  /// adds a record to socket stream
+  @override
+  void add(LogRecordEntity data);
+
+  /// dispose the sink/stream
+  @override
+  Future<void> close();
 }

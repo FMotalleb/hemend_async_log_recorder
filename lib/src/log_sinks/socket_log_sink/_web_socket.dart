@@ -17,6 +17,9 @@ class SocketLogSink extends base.SocketLogSink<WebSocket> {
     super.socket, {
     required super.serializer,
   }) {
+    socket.onOpen.drain(null).then(
+          (value) => isAttached = true,
+        );
     socket.onClose.drain(null).then(
           (value) => isAttached = false,
         );
@@ -32,7 +35,7 @@ class SocketLogSink extends base.SocketLogSink<WebSocket> {
         serializer: serializer,
       );
   @override
-  bool isAttached = true;
+  bool isAttached = false;
   @override
   void add(LogRecordEntity data) {
     final serialized = serializer(data);
@@ -41,7 +44,8 @@ class SocketLogSink extends base.SocketLogSink<WebSocket> {
   }
 
   @override
-  void close() {
-    socket.close();
-  }
+  Future<void> close() async => socket.close();
+
+  @override
+  bool get isClosed => isAttached == false;
 }

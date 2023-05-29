@@ -19,7 +19,10 @@ class FileLogSink implements base.FileLogSink {
   }
 
   @override
-  void close() {
+  Future<void> close() {
     throw UnimplementedError();
   }
+
+  @override
+  bool get isClosed => throw UnimplementedError();
 }

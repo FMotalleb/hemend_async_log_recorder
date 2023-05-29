@@ -39,7 +39,8 @@ class SocketLogSink extends base.SocketLogSink<WebSocket> {
   }
 
   @override
-  void close() {
-    socket.close();
-  }
+  Future<void> close() => socket.close();
+
+  @override
+  bool get isClosed => socket.closeCode != null;
 }

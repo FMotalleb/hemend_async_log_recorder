@@ -18,13 +18,22 @@ class FileLogSink implements base.FileLogSink {
   /// * [stringify]: method that converts log records to messages that will be
   /// recorded into the file
   /// * [file]: destination file
-  FileLogSink({
+  factory FileLogSink({
     required RecordStringify stringify,
     required String filePath,
-  }) : _controller = StreamController() {
-    _initSink(stringify, File(filePath));
-  }
+  }) =>
+      FileLogSink.fromFile(
+        file: File(filePath),
+        stringify: stringify,
+      );
 
+  /// {@macro file-log}
+  FileLogSink.fromFile({
+    required RecordStringify stringify,
+    required File file,
+  }) : _controller = StreamController() {
+    _initSink(stringify, file);
+  }
   void _initSink(RecordStringify stringify, File file) {
     unawaited(
       asyncFlow(
@@ -57,5 +66,8 @@ class FileLogSink implements base.FileLogSink {
   void add(LogRecordEntity data) => _controller.add(data);
 
   @override
-  void close() => _controller.sink.close();
+  Future<void> close() => _controller.sink.close();
+
+  @override
+  bool get isClosed => _controller.isClosed;
 }

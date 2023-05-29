@@ -42,5 +42,8 @@ class PostLogSink extends ILogSink {
   void add(LogRecordEntity data) => _controller.add(data);
 
   @override
-  void close() => _controller.sink.close();
+  Future<void> close() => _controller.sink.close();
+
+  @override
+  bool get isClosed => _controller.isClosed;
 }
