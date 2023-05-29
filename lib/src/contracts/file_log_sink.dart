@@ -15,6 +15,7 @@ class FileLogSink implements ILogSink {
     throw UnimplementedError();
   }
 
+  @override
   bool get isClosed => throw UnimplementedError();
   @override
   Future<void> close() {
