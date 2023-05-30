@@ -83,30 +83,30 @@ class HemendAsyncLogRecorder extends ILogRecorder {
     );
   }
 
-  /// {@macro hemend_async_log_recorder}
-  ///
-  /// * socket: web socket connection (from dart:io or dart:html)
-  ///
-  /// * [logLevel] (Optional): the level of the log to be recorded
-  /// defaults to 800 which is equal to Level.INFO but you may set this to zero
-  /// and use a limited logger
-  ///
-  /// * [recordSerializer] (Optional): uses [defaultRecordSerializer] by default
-  /// you are able to change this method to your desired serialization format
-  /// but its not needed for most cases
-  static HemendAsyncLogRecorder webSocket<T extends Object>({
-    required T socket,
-    RecordSerializer recordSerializer = defaultRecordSerializer,
-    int logLevel = 800,
-  }) {
-    return HemendAsyncLogRecorder.manual(
-      logLevel,
-      SocketLogSink<T>.from(
-        socket,
-        serializer: recordSerializer,
-      ),
-    );
-  }
+  // /// {@macro hemend_async_log_recorder}
+  // ///
+  // /// * socket: web socket connection (from dart:io or dart:html)
+  // ///
+  // /// * [logLevel] (Optional): the level of the log to be recorded
+  // /// defaults to 800 which is equal to Level.INFO but you may set this to zero
+  // /// and use a limited logger
+  // ///
+  // /// * [recordSerializer] (Optional): uses [defaultRecordSerializer] by default
+  // /// you are able to change this method to your desired serialization format
+  // /// but its not needed for most cases
+  // static HemendAsyncLogRecorder webSocket<T extends Object>({
+  //   required T socket,
+  //   RecordSerializer recordSerializer = defaultRecordSerializer,
+  //   int logLevel = 800,
+  // }) {
+  //   return HemendAsyncLogRecorder.manual(
+  //     logLevel,
+  //     SocketLogSink<T>.from(
+  //       socket,
+  //       serializer: recordSerializer,
+  //     ),
+  //   );
+  // }
 
   /// {@macro hemend_async_log_recorder}
   const HemendAsyncLogRecorder.manual(
