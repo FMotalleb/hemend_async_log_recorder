@@ -80,14 +80,14 @@ class HemendAsyncLogRecorder extends ILogRecorder {
   /// * [recordSerializer] (Optional): uses [defaultRecordSerializer] by default
   /// you are able to change this method to your desired serialization format
   /// but its not needed for most cases
-  factory HemendAsyncLogRecorder.webSocket({
-    required Object socket,
+  static HemendAsyncLogRecorder webSocket<T extends Object>({
+    required T socket,
     RecordSerializer recordSerializer = defaultRecordSerializer,
     int logLevel = 800,
   }) {
     return HemendAsyncLogRecorder.manual(
       logLevel,
-      SocketLogSink.from(
+      SocketLogSink<T>.from(
         socket,
         serializer: recordSerializer,
       ),
