@@ -12,7 +12,9 @@ void main() {
   // Define some example async tasks for testing
   late AsyncTask<int> dummyTask;
   late DummyAsyncTaskOrder orderedTasks;
+  late DummyAsyncTaskOrder orderedFailedTasks;
   late AsyncTask<int> orderedTask;
+  late AsyncTask<int> orderedFailedTask;
   setUp(
     () {
       dummyTask = (defer) async {
@@ -71,6 +73,45 @@ void main() {
         );
         return null;
       };
+
+      orderedFailedTasks = MockDummyAsyncTaskOrder();
+      when(orderedFailedTasks.t1()).thenAnswer(
+        (_) async => (
+          result: 1,
+          exception: null,
+        ),
+      );
+      when(orderedFailedTasks.t2()).thenThrow(Exception());
+      when(orderedFailedTasks.t3()).thenAnswer(
+        (_) async => (
+          result: 3,
+          exception: null,
+        ),
+      );
+      when(orderedFailedTasks.d1(any)).thenAnswer(
+        (_) async => null,
+      );
+      when(orderedFailedTasks.d2(any)).thenAnswer(
+        (_) async => null,
+      );
+      when(orderedFailedTasks.d3(any)).thenAnswer(
+        (_) async => null,
+      );
+      orderedFailedTask = (defer) {
+        orderedFailedTasks.t1();
+        defer(
+          (r) async => orderedFailedTasks.d1(r),
+        );
+        orderedFailedTasks.t2();
+        defer(
+          (r) async => orderedFailedTasks.d2(r),
+        );
+        orderedFailedTasks.t3();
+        defer(
+          (r) async => orderedFailedTasks.d3(r),
+        );
+        return null;
+      };
     },
   );
 
@@ -101,6 +142,29 @@ void main() {
         orderedTasks.d2(any),
         orderedTasks.d1(any),
       ]);
+
+      await AsyncFlow.handle(orderedFailedTask);
+
+      verifyInOrder(
+        [
+          orderedFailedTasks.t1(),
+          // in this test t2 has thrown an exception so it get called once
+          orderedFailedTasks.t2(),
+          orderedFailedTasks.d1(any),
+        ],
+      );
+
+      verifyNever(
+        orderedFailedTasks.t3(),
+      );
+
+      verifyNever(
+        orderedFailedTasks.d2(any),
+      );
+
+      verifyNever(
+        orderedFailedTasks.d3(any),
+      );
     },
   );
 

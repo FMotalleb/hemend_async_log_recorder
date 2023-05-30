@@ -30,11 +30,23 @@ class HemendAsyncLogRecorder extends ILogRecorder {
   /// * [recordSerializer] (Optional): uses [defaultRecordSerializer] by default
   /// you are able to change this method to your desired serialization format
   /// but its not needed for most cases
+  ///
+  /// * [concurrency] parameter is an integer that indicates the maximum number
+  /// of requests that can be launched simultaneously.
+  /// This parameter is crucial for managing the load on the server and
+  /// controlling the rate at which log records are sent.
+  ///
+  /// * [concurrencyWaitTime] parameter is an optional Duration that specifies
+  /// the amount of time to wait before launching new requests when the maximum
+  /// concurrency limit is reached. This parameter helps prevent overwhelming
+  /// the server with too many simultaneous requests.
   factory HemendAsyncLogRecorder.post({
     required String postUrl,
     int logLevel = 800,
     PostMethod postMethod = defaultPostMethod,
     RecordSerializer recordSerializer = defaultRecordSerializer,
+    int concurrency = 3,
+    Duration? concurrencyWaitTime,
   }) =>
       HemendAsyncLogRecorder.manual(
         logLevel,
@@ -42,6 +54,8 @@ class HemendAsyncLogRecorder extends ILogRecorder {
           serializer: recordSerializer,
           requestUrl: postUrl,
           recordMethod: postMethod,
+          concurrency: concurrency,
+          concurrencyWaitTime: concurrencyWaitTime,
         ),
       );
 

@@ -12,7 +12,9 @@ void main() {
   // Define some example async tasks for testing
   late SyncTask<int> dummyTask;
   late DummySyncTaskOrder orderedTasks;
+  late DummySyncTaskOrder orderedFailedTasks;
   late SyncTask<int> orderedTask;
+  late SyncTask<int> orderedFailedTask;
   setUp(
     () {
       dummyTask = (defer) {
@@ -26,6 +28,44 @@ void main() {
           result: 1,
           exception: null,
         );
+      };
+
+      orderedFailedTasks = MockDummySyncTaskOrder();
+      when(orderedFailedTasks.t1()).thenReturn(
+        (
+          result: 1,
+          exception: null,
+        ),
+      );
+      when(orderedFailedTasks.t2()).thenThrow(
+        Exception(),
+      );
+      when(orderedFailedTasks.t3()).thenThrow(
+        Exception(),
+      );
+      when(orderedFailedTasks.d1(any)).thenReturn(
+        null,
+      );
+      when(orderedFailedTasks.d2(any)).thenReturn(
+        null,
+      );
+      when(orderedFailedTasks.d3(any)).thenReturn(
+        null,
+      );
+      orderedFailedTask = (defer) {
+        orderedFailedTasks.t1();
+        defer(
+          (r) => orderedFailedTasks.d1(r),
+        );
+        orderedFailedTasks.t2();
+        defer(
+          (r) => orderedFailedTasks.d2(r),
+        );
+        orderedFailedTasks.t3();
+        defer(
+          (r) => orderedFailedTasks.d3(r),
+        );
+        return null;
       };
 
       orderedTasks = MockDummySyncTaskOrder();
@@ -92,7 +132,6 @@ void main() {
     'SyncFlow handles deferred tasks in correct order',
     () {
       SyncFlow.handle(orderedTask);
-
       verifyInOrder([
         orderedTasks.t1(),
         orderedTasks.t2(),
@@ -101,6 +140,29 @@ void main() {
         orderedTasks.d2(any),
         orderedTasks.d1(any),
       ]);
+
+      SyncFlow.handle(orderedFailedTask);
+
+      verifyInOrder(
+        [
+          orderedFailedTasks.t1(),
+          // in this test t2 has thrown an exception so it get called once
+          orderedFailedTasks.t2(),
+          orderedFailedTasks.d1(any),
+        ],
+      );
+
+      verifyNever(
+        orderedFailedTasks.t3(),
+      );
+
+      verifyNever(
+        orderedFailedTasks.d2(any),
+      );
+
+      verifyNever(
+        orderedFailedTasks.d3(any),
+      );
     },
   );
 
