@@ -1,3 +1,8 @@
+## 0.1.7+1
+
+* (major): websocket recorder disabled for now
+* (tests): go_flow
+
 ## 0.1.6+1
 
 * (tests): io file tests
