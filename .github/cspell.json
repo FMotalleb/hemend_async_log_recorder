@@ -22,6 +22,7 @@
     "hemend_async_log_recorder",
     "hemend",
     "websockets",
-    "Hemend"
+    "Hemend",
+    "codecov"
   ]
 }
