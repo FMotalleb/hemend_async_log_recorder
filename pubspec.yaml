@@ -1,6 +1,6 @@
 name: hemend_async_log_recorder
 description: An Extension to the hemend_logger package that enables asynchronously logging
-version: 0.1.7+1
+version: 0.1.8+1
 repository: https://github.com/FMotalleb/hemend_async_log_recorder
 
 environment:
