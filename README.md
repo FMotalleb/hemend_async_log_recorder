@@ -8,6 +8,7 @@
 [![git repo](https://img.shields.io/pub/v/hemend_async_log_recorder?color=blue&label=git)][git_link]
 [![Tests](https://github.com/FMotalleb/hemend_async_log_recorder/actions/workflows/main.yaml/badge.svg)](https://github.com/FMotalleb/hemend_async_log_recorder/actions/workflows/main.yaml)
 [![Auto Publish](https://github.com/FMotalleb/hemend_async_log_recorder/actions/workflows/publish.yaml/badge.svg)](https://github.com/FMotalleb/hemend_async_log_recorder/actions/workflows/publish.yaml)
+[![codecov](https://codecov.io/gh/FMotalleb/hemend_async_log_recorder/branch/master/graph/badge.svg?token=RR2XH1EPWY)](https://codecov.io/gh/FMotalleb/hemend_async_log_recorder)
 
 The presented software package expands upon the existing functionality of the hemend_logger package, which can be found at <https://pub.dev/packages/hemend_logger>. This extension enhances the capabilities of the package by introducing asynchronous logging functions that enable the recording of logs using various methods, such as post requests, websockets, files, and more.
 
