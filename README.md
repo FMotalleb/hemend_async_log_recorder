@@ -2,11 +2,11 @@
 
 [![License: MIT][license_badge]][license_link]
 [![pub package](https://img.shields.io/pub/v/hemend_async_log_recorder?color=blue)][pub_link]
+[![git repo](https://img.shields.io/pub/v/hemend_async_log_recorder?color=blue&label=git)][git_link]
 [![pub points](https://img.shields.io/pub/points/hemend_async_log_recorder)][pub_link]
 [![code_count](https://img.shields.io/github/languages/top/fmotalleb/hemend_async_log_recorder?color=green&label=pure%20dart)][pub_link]
 [![code size](https://img.shields.io/github/languages/code-size/fmotalleb/hemend_async_log_recorder)][git_link]
-[![git repo](https://img.shields.io/pub/v/hemend_async_log_recorder?color=blue&label=git)][git_link]
-[![Tests](https://github.com/FMotalleb/hemend_async_log_recorder/actions/workflows/main.yaml/badge.svg)](https://github.com/FMotalleb/hemend_async_log_recorder/actions/workflows/main.yaml)
+[![Ci](https://github.com/FMotalleb/hemend_async_log_recorder/actions/workflows/main.yaml/badge.svg)](https://github.com/FMotalleb/hemend_async_log_recorder/actions/workflows/main.yaml)
 [![Auto Publish](https://github.com/FMotalleb/hemend_async_log_recorder/actions/workflows/publish.yaml/badge.svg)](https://github.com/FMotalleb/hemend_async_log_recorder/actions/workflows/publish.yaml)
 [![codecov](https://codecov.io/gh/FMotalleb/hemend_async_log_recorder/branch/master/graph/badge.svg?token=RR2XH1EPWY)](https://codecov.io/gh/FMotalleb/hemend_async_log_recorder)
 
