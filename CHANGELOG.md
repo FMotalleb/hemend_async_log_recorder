@@ -1,3 +1,7 @@
+## 0.1.10+1
+
+* (fix): concurrency bug in post request
+
 ## 0.1.9+1
 
 * (minor): exposing `ILogSync` contract for further extendability

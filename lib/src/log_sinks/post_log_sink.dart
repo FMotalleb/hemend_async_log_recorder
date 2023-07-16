@@ -55,12 +55,11 @@ class PostLogSink extends ILogSink {
   ) {
     _controller.stream.map(serializer).listen(
       (record) async {
-        final resource = await _concurrentPool.withResource(
-          () => recordMethod,
-        );
-        await resource(
-          requestUrl,
-          record,
+        await _concurrentPool.withResource(
+          () async => recordMethod(
+            requestUrl,
+            record,
+          ),
         );
       },
     );
