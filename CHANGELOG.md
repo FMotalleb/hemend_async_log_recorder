@@ -1,3 +1,7 @@
+## 0.1.9+1
+
+* (minor): exposing `ILogSync` contract for further extendability
+
 ## 0.1.8+1
 
 * (major): websocket recorder disabled for now
