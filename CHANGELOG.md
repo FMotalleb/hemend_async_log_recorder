@@ -1,3 +1,10 @@
+## 0.1.12+1
+
+* (feat): `Allocate` flag on FileSink
+  * create file on absence
+
+* (revert-v0.1.11+1): `FileSink` now does not create file by its own. (you have to pass allocate=true flag)
+
 ## 0.1.11+1
 
 * (fix): missing file exception in linux
