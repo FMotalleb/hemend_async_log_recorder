@@ -1,3 +1,7 @@
+## 0.1.11+1
+
+* (fix): missing file exception in linux
+
 ## 0.1.10+1
 
 * (fix): concurrency bug in post request
