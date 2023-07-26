@@ -49,7 +49,21 @@ void main() {
         allocate: true,
       );
     });
+    test(
+      'create instance without named constructor',
+      () async {
+        final file = File('__test_path.log');
+        final sink = FileLogSink(
+          stringify: (p0) => '',
+          allocate: false,
+          filePath: file.path,
+        );
 
+        expect(sink, isNotNull);
+        await sink.close();
+        await file.delete();
+      },
+    );
     test('add method should add log record to the controller', () async {
       // Create fake Log record
       final mockLogRecord = LogRecordEntity(

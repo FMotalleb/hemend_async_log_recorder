@@ -1,5 +1,6 @@
 import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
 import 'package:hemend_async_log_recorder/src/go_flow/async_flow.dart';
+import 'package:hemend_async_log_recorder/src/go_flow/helper.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -119,6 +120,20 @@ void main() {
     'AsyncFlow handles deferred tasks',
     () async {
       final result = AsyncFlow.handle(dummyTask);
+      expect(
+        await result.then((value) => value?.result),
+        equals(2),
+      );
+      expect(
+        await result.then((value) => value?.exception),
+        equals(null),
+      );
+    },
+  );
+  test(
+    'helper does the job',
+    () async {
+      final result = asyncFlow(dummyTask);
       expect(
         await result.then((value) => value?.result),
         equals(2),
