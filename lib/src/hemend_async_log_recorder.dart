@@ -65,17 +65,21 @@ class HemendAsyncLogRecorder extends ILogRecorder {
   ///
   /// * [stringify] (optional): format log records to string
   ///
+  /// * [allocate] (optional): force file allocation
+  ///
   /// * [logLevel] (Optional): the level of the log to be recorded
   /// defaults to 800 which is equal to Level.INFO but you may set this to zero
   /// and use a limited logger
   factory HemendAsyncLogRecorder.file({
     required String filePath,
+    bool allocate = false,
     RecordStringify stringify = defaultStringifyMethod,
     int logLevel = 800,
   }) {
     return HemendAsyncLogRecorder.manual(
       logLevel,
       FileLogSink(
+        allocate: allocate,
         stringify: stringify,
         filePath: filePath,
       ),

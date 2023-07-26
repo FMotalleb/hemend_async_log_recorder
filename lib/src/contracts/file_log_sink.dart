@@ -8,6 +8,7 @@ class FileLogSink implements ILogSink {
   FileLogSink({
     required RecordStringify stringify,
     required String filePath,
+    bool allocate = false,
   });
 
   @override
