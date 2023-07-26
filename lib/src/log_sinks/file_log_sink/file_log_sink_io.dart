@@ -17,7 +17,9 @@ class FileLogSink implements base.FileLogSink {
   ///
   /// * [stringify]: method that converts log records to messages that will be
   /// recorded into the file
-  /// * [file]: destination file
+  /// * [file]: destination file **must be present**
+  ///   so if this file is missing please use File(*).create() before creating
+  ///   this instance
   factory FileLogSink({
     required RecordStringify stringify,
     required String filePath,
@@ -38,8 +40,6 @@ class FileLogSink implements base.FileLogSink {
     unawaited(
       asyncFlow(
         (defer) async {
-          // ignore: avoid_slow_async_io
-          await file.create(recursive: true);
           final sink = file.openWrite(
             mode: FileMode.append,
           );
