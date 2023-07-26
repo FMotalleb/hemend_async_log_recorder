@@ -17,29 +17,45 @@ class FileLogSink implements base.FileLogSink {
   ///
   /// * [stringify]: method that converts log records to messages that will be
   /// recorded into the file
+  /// * [allocate]: create file if its absent (not recommended)
   /// * [file]: destination file **must be present**
   ///   so if this file is missing please use File(*).create() before creating
   ///   this instance
+
   factory FileLogSink({
     required RecordStringify stringify,
     required String filePath,
+    bool allocate = false,
   }) =>
       FileLogSink.fromFile(
         file: File(filePath),
         stringify: stringify,
+        allocate: allocate,
       );
 
   /// {@macro file-log}
   FileLogSink.fromFile({
     required RecordStringify stringify,
     required File file,
+    bool allocate = false,
   }) : _controller = StreamController() {
-    _initSink(stringify, file);
+    _initSink(
+      stringify,
+      file,
+      allocate,
+    );
   }
-  void _initSink(RecordStringify stringify, File file) {
+  void _initSink(
+    RecordStringify stringify,
+    File file,
+    bool allocate,
+  ) {
     unawaited(
       asyncFlow(
         (defer) async {
+          if (allocate) {
+            await file.create(recursive: true);
+          }
           final sink = file.openWrite(
             mode: FileMode.append,
           );
