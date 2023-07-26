@@ -38,6 +38,8 @@ class FileLogSink implements base.FileLogSink {
     unawaited(
       asyncFlow(
         (defer) async {
+          // ignore: avoid_slow_async_io
+          await file.create(recursive: true);
           final sink = file.openWrite(
             mode: FileMode.append,
           );
