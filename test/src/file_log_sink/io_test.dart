@@ -55,7 +55,6 @@ void main() {
         final file = File('__test_path.log');
         final sink = FileLogSink(
           stringify: (p0) => '',
-          allocate: false,
           filePath: file.path,
         );
 
