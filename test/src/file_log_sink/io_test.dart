@@ -22,7 +22,13 @@ void main() {
       simpleStringify = (record) => record.message;
       mockFile = MockFile();
       mockSink = MockIOSink();
-
+      when(
+        mockFile.create(
+          recursive: anyNamed('recursive'),
+        ),
+      ).thenAnswer(
+        (realInvocation) => Future.value(mockFile),
+      );
       // Mock the file initialization
       when(
         mockFile.openWrite(mode: anyNamed('mode')),
@@ -40,6 +46,7 @@ void main() {
       fileLogSink = FileLogSink.fromFile(
         stringify: simpleStringify,
         file: mockFile,
+        allocate: true,
       );
     });
 
@@ -70,12 +77,6 @@ void main() {
 
       // Assert
       expect(fileLogSink.isClosed, true);
-    });
-
-    // Add more test cases as needed
-
-    tearDown(() {
-      // Close the file or perform any necessary cleanup
     });
   });
 }
