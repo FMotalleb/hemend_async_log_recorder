@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:hemend_async_log_recorder/src/go_flow/helper.dart';
+import 'package:go_flow/go_flow.dart';
 import 'package:http/http.dart' as http;
 
 /// default method used to send post requests
@@ -10,11 +10,11 @@ Future<void> defaultPostMethod(
   String url,
   Map<String, dynamic> record,
 ) =>
-    asyncFlow(
+    asyncGoFlow(
       (defer) async {
         final client = http.Client();
         defer(
-          (_) {
+          (_, recover) {
             client.close();
           },
         );

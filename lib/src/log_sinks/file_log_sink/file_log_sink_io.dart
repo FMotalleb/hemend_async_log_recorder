@@ -2,11 +2,10 @@
 
 import 'dart:async';
 import 'dart:io';
-
+import 'package:go_flow/go_flow.dart';
 import 'package:hemend_async_log_recorder/src/contracts/file_log_sink.dart' //
     as base;
 import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
-import 'package:hemend_async_log_recorder/src/go_flow/helper.dart';
 import 'package:hemend_logger/hemend_logger.dart';
 
 /// {@template file-log}
@@ -51,7 +50,7 @@ class FileLogSink implements base.FileLogSink {
     bool allocate,
   ) {
     unawaited(
-      asyncFlow(
+      asyncGoFlow(
         (defer) async {
           if (allocate) {
             await file.create(recursive: true);
@@ -60,7 +59,7 @@ class FileLogSink implements base.FileLogSink {
             mode: FileMode.append,
           );
           defer(
-            (_) {
+            (_, recover) {
               sink.close();
             },
           );
