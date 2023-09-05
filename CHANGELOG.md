@@ -1,3 +1,8 @@
+## 0.1.14
+
+* (Minor): added dependency to go_flow
+  * removed internal implementation of deferred flow
+
 ## 0.1.13+1
 
 * (feat): `Allocate` flag on FileSink
