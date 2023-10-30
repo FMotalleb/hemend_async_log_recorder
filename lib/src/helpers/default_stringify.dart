@@ -1,16 +1,5 @@
 import 'package:hemend_logger/hemend_logger.dart';
 
-const _defaultLevelMap = {
-  1200: 'Shout',
-  1000: 'Severe',
-  900: 'Warning',
-  800: 'Info',
-  700: 'Config',
-  500: 'Fine',
-  400: 'Finer',
-  300: 'Finest',
-};
-
 /// the default stringify function used to format records to string to
 /// store them in file
 String defaultStringifyMethod(LogRecordEntity record) {
@@ -24,17 +13,11 @@ String defaultStringifyMethod(LogRecordEntity record) {
     ..write(' ')
     ..write('[$loggerName]');
 
-  final level = _defaultLevelMap.entries
-      .where(
-        (element) => element.key <= record.level,
-      )
-      .firstOrNull;
-  if (level != null) {
-    buffer
-      ..write(' ')
-      ..write('<${level.value}>');
-  }
+  final level = HemendLogger.loggerLevelMapper(record.level);
+
   buffer
+    ..write(' ')
+    ..write('<$level>')
     ..write(': ')
     ..writeln(record.message);
   if (record.error != null) {
