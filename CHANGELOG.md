@@ -1,3 +1,7 @@
+## 0.3.0
+
+* (versioning) in par with HemendLogger
+
 ## 0.1.14
 
 * (Minor): added dependency to go_flow
