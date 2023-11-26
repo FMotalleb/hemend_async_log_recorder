@@ -1,6 +1,7 @@
-import 'package:hemend_async_log_recorder/src/contracts/log_sink.dart';
-import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
 import 'package:hemend_logger/hemend_logger.dart';
+
+import '../../contracts/log_sink.dart';
+import '../../contracts/typedefs.dart';
 
 /// this abstract class used to provide cross-platform socket-connection
 /// to logger

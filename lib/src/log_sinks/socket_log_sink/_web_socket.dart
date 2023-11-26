@@ -1,10 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:html' show WebSocket;
 
-import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
-
 import 'package:hemend_logger/hemend_logger.dart';
 import 'package:meta/meta.dart';
+
+import '../../contracts/typedefs.dart';
 import '_base_socket.dart' //
     as base;
 
@@ -17,12 +18,16 @@ class SocketLogSink extends base.SocketLogSink<WebSocket> {
     super.socket, {
     required super.serializer,
   }) {
-    socket.onOpen.drain(null).then(
-          (value) => isAttached = true,
-        );
-    socket.onClose.drain(null).then(
-          (value) => isAttached = false,
-        );
+    unawaited(
+      socket.onOpen.drain(null).then(
+            (value) => isAttached = true,
+          ),
+    );
+    unawaited(
+      socket.onClose.drain(null).then(
+            (value) => isAttached = false,
+          ),
+    );
   }
 
   /// creates socket connection from io.WebSocket
@@ -47,5 +52,5 @@ class SocketLogSink extends base.SocketLogSink<WebSocket> {
   Future<void> close() async => socket.close();
 
   @override
-  bool get isClosed => isAttached == false;
+  bool get isClosed => !isAttached;
 }

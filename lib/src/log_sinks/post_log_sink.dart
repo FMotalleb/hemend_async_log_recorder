@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:hemend_async_log_recorder/src/contracts/log_sink.dart';
-import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
 import 'package:hemend_logger/hemend_logger.dart';
 import 'package:pool/pool.dart';
+
+import '../contracts/log_sink.dart';
+import '../contracts/typedefs.dart';
 
 /// {@template log-sink}
 /// {@macro log-sink-abstraction}

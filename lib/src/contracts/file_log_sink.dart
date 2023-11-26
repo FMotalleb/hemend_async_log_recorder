@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, avoid_unused_constructor_parameters
 
-import 'package:hemend_async_log_recorder/src/contracts/log_sink.dart';
-import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
 import 'package:hemend_logger/hemend_logger.dart';
+
+import 'log_sink.dart';
+import 'typedefs.dart';
 
 class FileLogSink implements ILogSink {
   FileLogSink({

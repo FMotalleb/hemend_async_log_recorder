@@ -3,10 +3,10 @@
 import 'dart:convert';
 import 'dart:io' show WebSocket;
 
-import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
-
 import 'package:hemend_logger/hemend_logger.dart';
 import 'package:meta/meta.dart';
+
+import '../../contracts/typedefs.dart';
 import '_base_socket.dart' //
     as base;
 

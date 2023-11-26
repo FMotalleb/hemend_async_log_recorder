@@ -1,11 +1,12 @@
-import 'package:hemend_async_log_recorder/src/contracts/log_sink.dart';
-import 'package:hemend_async_log_recorder/src/contracts/typedefs.dart';
-import 'package:hemend_async_log_recorder/src/helpers/default_post_method.dart';
-import 'package:hemend_async_log_recorder/src/helpers/default_stringify.dart';
-import 'package:hemend_async_log_recorder/src/helpers/record_serializer.dart';
-import 'package:hemend_async_log_recorder/src/log_sinks/file_log_sink/file_log_sink.dart';
-import 'package:hemend_async_log_recorder/src/log_sinks/post_log_sink.dart';
 import 'package:hemend_logger/hemend_logger.dart';
+
+import 'contracts/log_sink.dart';
+import 'contracts/typedefs.dart';
+import 'helpers/default_post_method.dart';
+import 'helpers/default_stringify.dart';
+import 'helpers/record_serializer.dart';
+import 'log_sinks/file_log_sink/file_log_sink.dart';
+import 'log_sinks/post_log_sink.dart';
 
 /// {@template hemend_async_log_recorder}
 /// A Simple implementation of [ILogRecorder] that sends log messages
@@ -104,5 +105,5 @@ class HemendAsyncLogRecorder extends ILogRecorder {
   void onRecord(LogRecordEntity record) => _requestSink.add(record);
 
   @override
-  void close() => _requestSink.close();
+  Future<void> close() async => _requestSink.close();
 }

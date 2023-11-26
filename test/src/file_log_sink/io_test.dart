@@ -18,7 +18,7 @@ void main() {
     late MockFile mockFile;
     late MockIOSink mockSink;
 
-    setUp(() {
+    setUp(() async {
       simpleStringify = (record) => record.message;
       mockFile = MockFile();
       mockSink = MockIOSink();
