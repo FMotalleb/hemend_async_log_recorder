@@ -1,3 +1,7 @@
+## 0.3.1
+
+* (Minor) bump http package version
+
 ## 0.3.0
 
 * (versioning) in par with HemendLogger
