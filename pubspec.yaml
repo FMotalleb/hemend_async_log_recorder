@@ -16,6 +16,6 @@ dev_dependencies:
 dependencies:
   go_flow: ^1.0.0
   hemend_logger: ">=0.3.0 <1.0.0"
-  http: ^1.0.0
+  http: ^1.1.0
   meta: ^1.9.1
   pool: ^1.5.1
