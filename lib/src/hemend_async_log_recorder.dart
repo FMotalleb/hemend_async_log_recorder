@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hemend_logger/hemend_logger.dart';
 
 import 'contracts/log_sink.dart';
@@ -6,6 +8,7 @@ import 'helpers/default_post_method.dart';
 import 'helpers/default_stringify.dart';
 import 'helpers/record_serializer.dart';
 import 'log_sinks/file_log_sink/file_log_sink.dart';
+import 'log_sinks/isolated_log_sink/isolated_log_sink.dart';
 import 'log_sinks/post_log_sink.dart';
 
 /// {@template hemend_async_log_recorder}
@@ -86,6 +89,23 @@ class HemendAsyncLogRecorder extends ILogRecorder {
       ),
     );
   }
+
+  /// {@macro IsolatedLogSink}
+  static Future<HemendAsyncLogRecorder> isolated(
+    int logLevel,
+    FutureOr<void> Function(LogRecordEntity) recorder, {
+    FutureOr<void> Function()? preload,
+    FutureOr<void> Function()? onDone,
+    String? isolateDebugName,
+  }) =>
+      IsolatedLogSink.spawn(
+        recorder,
+        preload: preload,
+        onDone: onDone,
+        debugName: isolateDebugName,
+      ).then(
+        (value) => HemendAsyncLogRecorder.manual(logLevel, value),
+      );
 
   /// {@macro hemend_async_log_recorder}
   const HemendAsyncLogRecorder.manual(

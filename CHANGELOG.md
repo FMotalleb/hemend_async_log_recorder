@@ -1,3 +1,7 @@
+## 0.3.2
+
+* (Feat) added Isolated log-sink
+
 ## 0.3.1
 
 * (Minor) bump http package version
