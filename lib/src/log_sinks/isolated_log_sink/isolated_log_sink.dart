@@ -1,22 +1,44 @@
+import 'dart:async';
 import 'dart:isolate';
 
 import 'package:hemend_logger/hemend_logger.dart';
 
 import '../../../hemend_async_log_recorder.dart';
 
+/// {@template IsolatedLogSink}
+///  Use [IsolatedLogSink.spawn] to spawn the isolate
+///
+///  **Note:**
+///   these methods are inside the isolate dus they cannot access anything
+///   outside of their scopes
+///
+/// params:
+///
+/// - recorder
+///   - will be called to record the message inside the isolate
+///
+/// - preload
+///   - will be called before the main loop inside the isolate
+/// {@endtemplate}
 class IsolatedLogSink extends ILogSink {
   IsolatedLogSink._(
     this._isolate,
     this._port,
   );
+
+  /// {@macro IsolatedLogSink}
   static Future<IsolatedLogSink> spawn(
-    Future<void> Function(LogRecordEntity) recorder,
-  ) async {
+    FutureOr<void> Function(LogRecordEntity) recorder, {
+    /// Called before going inside the loop
+    FutureOr<void> Function()? preload,
+    String? debugName,
+  }) async {
     final port = ReceivePort();
     final isolate = await Isolate.spawn(
       (message) async {
         final internalPort = ReceivePort();
         message.send(internalPort.sendPort);
+        await preload?.call();
         await for (final record in internalPort) {
           switch (record) {
             case _KillSig _:
@@ -27,6 +49,7 @@ class IsolatedLogSink extends ILogSink {
         }
       },
       port.sendPort,
+      debugName: debugName,
     );
     final sendPort = await port.first;
     return IsolatedLogSink._(
