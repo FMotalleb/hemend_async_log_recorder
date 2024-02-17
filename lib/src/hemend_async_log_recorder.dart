@@ -17,6 +17,12 @@ import 'log_sinks/post_log_sink.dart';
 /// {@endtemplate}
 class HemendAsyncLogRecorder extends ILogRecorder {
   /// {@macro hemend_async_log_recorder}
+  const HemendAsyncLogRecorder.manual(
+    this.logLevel,
+    this._requestSink,
+  );
+
+  /// {@macro hemend_async_log_recorder}
   ///
   /// this constructor uses simple api to construct the recorder
   ///
@@ -106,12 +112,6 @@ class HemendAsyncLogRecorder extends ILogRecorder {
       ).then(
         (value) => HemendAsyncLogRecorder.manual(logLevel, value),
       );
-
-  /// {@macro hemend_async_log_recorder}
-  const HemendAsyncLogRecorder.manual(
-    this.logLevel,
-    this._requestSink,
-  );
 
   /// a log sink that manages log records
   /// this is used to make sure that sync records are able to
