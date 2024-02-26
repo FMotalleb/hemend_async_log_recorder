@@ -118,6 +118,7 @@ class IsolatedLogSink extends ILogSink {
       },
       port.sendPort,
       debugName: debugName,
+      errorsAreFatal: false,
     );
     final sendPort = await port.first;
     return IsolatedLogSink._(
